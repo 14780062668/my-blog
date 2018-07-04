@@ -5,9 +5,34 @@
 		border 1px solid #ddd
 		border-radius 4px
 		padding 10px 20px 16px
+		margin-bottom 20px
 		h2
 			border-left 4px solid color-main
 			text-indent 10px
+	.list-box
+		border 1px solid #ddd
+		border-radius 4px
+		li
+			background #fff
+			padding 20px
+			overflow hidden
+			&:nth-child(n+2)
+				border-top 1px solid #ddd
+			.list-img
+				width 220px
+				margin-right 10px
+			.list-msg
+				width calc(100% - 230px)
+				h3
+					margin-bottom 10px
+				.meta
+					color #999
+					font-size font-size-samll
+					margin-bottom 10px
+					span
+						margin-left 20px
+					a
+						color #999
 .hot-tag-box
 	width 30%
 	background #fff

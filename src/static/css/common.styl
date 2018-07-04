@@ -1,0 +1,63 @@
+*
+	margin 0
+	padding 0
+html, body
+	height 100%
+body
+	font font-size-default/1.5 "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+	color text-color-default
+	background body-bg-color
+b
+	font-weight 500
+a
+	color color-main
+	text-decoration none
+	&:hover, &:focus
+		color color-main-hover
+	&:focus
+		outline none
+input
+	border none
+	outline none
+	/*清除移动端默认的表单样式*/
+	-webkit-appearance none
+/*safari 下 table的滚动条*/
+.box
+	::-webkit-scrollbar
+		-webkit-appearance none
+		width 12px
+	::-webkit-scrollbar-thumb
+		border-radius 12px
+		background-color rgba(0,0,0,0.3)
+		-webkit-box-shadow 0 0 1px rgba(255,255,255,0.3)
+textarea
+	resize none
+input,textarea
+	font-size: 14px;
+	color: #5a5e66;
+	font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif
+ul, ol, li
+	list-style none
+table
+	border-collapse collapse
+button
+	outline-style none
+	border 0
+img,video,audio
+	max-width 100%
+
+
+.fade-enter
+	opacity 0
+.fade-leave
+	opacity 1
+.fade-enter-active
+	transition 0.3s
+.fade-leave-active
+	opacity 0
+	transition 0.3s
+
+.fl
+	float left
+.fr
+	float right

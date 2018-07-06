@@ -11,6 +11,9 @@
 				<router-link to="/note">
 					前端笔记
 				</router-link>
+				<router-link to="/live">
+					生活日记
+				</router-link>
 				<router-link to="/introduction">
 					自我介绍
 				</router-link>
@@ -43,11 +46,11 @@ export default {
 			vertical-align middle
 	nav
 		display inline-block
+		text-align right
 		width 70%
 		a
 			display inline-block
-			width 20%
-			text-align center
+			padding 0 40px
 		.router-link-active
 			background #037cce
 </style>

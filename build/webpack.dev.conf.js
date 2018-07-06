@@ -89,8 +89,9 @@ module.exports = new Promise((resolve, reject) => {
         ? utils.createNotifierCallback()
         : undefined
       }))
-      opn (`http://${devWebpackConfig.devServer.host}:${port}`);
-
+      setTimeout(() => {
+        opn (`http://${devWebpackConfig.devServer.host}:${port}`);
+      }, 2000);
       resolve(devWebpackConfig)
     }
   })

@@ -12,7 +12,9 @@ export default {
 		};
 	},
 	created () {
-		this.$router.push({ path: '/home' });
+		if (this.$route.path === '/' || this.$route.path === '') {
+			this.$router.push({ path: '/home' });
+		}
 	},
 	mounted () {
 		let browserHeight = window.innerHeight;

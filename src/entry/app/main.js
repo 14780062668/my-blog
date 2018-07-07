@@ -13,7 +13,7 @@ import '@/static/iconfont/iconfont.css';
 Vue.use(ElementUI);
 Vue.use(VueLazyload, {
 	error: 'dist/error.png',
-  loading: 'dist/loading.gif',
+	loading: 'dist/loading.gif'
 });
 
 Vue.prototype.$axios = axios;

@@ -45,12 +45,13 @@ export default {
 			font-size 40px
 			vertical-align middle
 	nav
-		display inline-block
-		text-align right
-		width 70%
+		float right
+		overflow hidden
 		a
-			display inline-block
+			float left
 			padding 0 40px
+			&:hover
+				background #037cce
 		.router-link-active
 			background #037cce
 </style>

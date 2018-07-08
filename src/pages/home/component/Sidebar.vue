@@ -13,13 +13,13 @@
 </template>
 <script>
 export default {
-	data () {
+	data() {
 		return {
 			tags: ['Git', 'jQuery', 'ES6', 'node']
 		};
 	},
-	created () {
-		function sum (...m) {
+	created() {
+		function sum(...m) {
 			let total = 0;
 			for (let i of m) {
 				total += i;
@@ -31,27 +31,27 @@ export default {
 		this.axiosPost();
 	},
 	methods: {
-		axiosGet () {
+		axiosGet() {
 			this.$axios.get('../index.html', {
 				params: {
 					id: 1
 				}
 			})
-				.then(function (response) {
+				.then(function(response) {
 					console.log(response);
 				})
-				.catch(function (error) {
+				.catch(function(error) {
 					console.log(error);
 				});
 		},
-		axiosPost () {
+		axiosPost() {
 			this.$axios.post('../index.html', {
 				id: 1
 			})
-				.then(function (response) {
+				.then(function(response) {
 					console.log(response);
 				})
-				.catch(function (error) {
+				.catch(function(error) {
 					console.log(error);
 				});
 		}

@@ -24,13 +24,13 @@
 <script>
 export default {
 	name: 'Header',
-	data () {
+	data() {
 		return {
 			count: 10
 		};
 	},
 	methods: {
-		add () {
+		add() {
 			this.count++;
 			console.log(this.count);
 		}

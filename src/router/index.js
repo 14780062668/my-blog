@@ -14,7 +14,7 @@ import TagIndex from '@/pages/tag/index';
 Vue.use(Router);
 let router = new Router({
 	mode: 'history',
-	scrollBehavior (to, from, savedPosition) {
+	scrollBehavior(to, from, savedPosition) {
 		return savedPosition || {x: 0, y: 0};
 	},
 	routes: [{

@@ -29,13 +29,13 @@
 </template>
 <script>
 export default {
-	data () {
+	data() {
 		return {
 			num: 10,
 			title: '最新博文'
 		};
 	},
-	created () {
+	created() {
 		switch (this.$route.name) {
 		case 'NoteIndex':
 			this.title = '前端笔记';

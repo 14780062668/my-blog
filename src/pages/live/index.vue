@@ -15,7 +15,7 @@ export default {
 		List,
 		Sidebar
 	},
-	data () {
+	data() {
 		return {
 		};
 	}

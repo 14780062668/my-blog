@@ -8,12 +8,12 @@
 </template>
 <script>
 export default {
-	data () {
+	data() {
 		return {
 			loading: true
 		};
 	},
-	created () {
+	created() {
 	}
 };
 </script>

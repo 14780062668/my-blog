@@ -7,16 +7,16 @@
 </template>
 <script>
 export default {
-	data () {
+	data() {
 		return {
 		};
 	},
-	created () {
+	created() {
 		if (this.$route.path === '/' || this.$route.path === '') {
 			this.$router.push({ path: '/home' });
 		}
 	},
-	mounted () {
+	mounted() {
 		let browserHeight = window.innerHeight;
 		let footerHeight = document.querySelector('#footer').clientHeight;
 		let containerDom = document.querySelector('#page-container');

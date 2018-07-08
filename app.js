@@ -5,9 +5,21 @@
 
 // 基本模块
 const color = require('colors');
-const path = requre('path');
+const path = require('path');
 const express = require('express');
 const http = require('http');
+const opn = require('opn');
+const port = 8001;
+const ip = '127.0.0.1';
+http.createServer((req, res) => {
+	res.writeHead(200, {
+		'Content-Type': 'text/plain'
+	});
+	res.end('Hello yl');
+}).listen(port, ip);
+console.log(`Server running at ${ip}:${port}`);
+opn(`http://${ip}:${port}`, {app: 'google chrome'});
+
 
 // const express = require('express');
 // const history = require('connect-history-api-fallback');

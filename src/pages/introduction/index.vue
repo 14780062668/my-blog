@@ -40,12 +40,6 @@
 				<h5>mongodb</h5>
 				<span class="key-point">熟练度:95%</span>
 			</li>
-			<li v-for="item in skillList"
-				:key="item.id">
-				<img v-lazy="item.src" :alt="item.name" />
-				<h5>{{item.name}}</h5>
-				<span class="key-point">熟练度:95%</span>
-			</li>
 		</ul>
 	</div>
 </template>
@@ -53,11 +47,6 @@
 export default {
 	data () {
 		return {
-			skillList: [{
-				id: 1,
-				name: 'mongodb',
-				src: '/static/img/mongodb.png'
-			}]
 		};
 	}
 };

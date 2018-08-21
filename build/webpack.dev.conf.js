@@ -4,7 +4,6 @@ const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
 const path = require('path')
-const opn = require('opn')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -89,9 +88,6 @@ module.exports = new Promise((resolve, reject) => {
         ? utils.createNotifierCallback()
         : undefined
       }))
-      setTimeout(() => {
-        opn (`http://${devWebpackConfig.devServer.host}:${port}`);
-      }, 2000);
       resolve(devWebpackConfig)
     }
   })

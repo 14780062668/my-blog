@@ -9,9 +9,16 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "linux": "NODE_ENV=development node ./app.js"
+    "linux": "NODE_ENV=development node ./app.js",
+    "server": "NODE_ENV=development node ./server/bin/www"
   },
   "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "swig": "^1.4.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

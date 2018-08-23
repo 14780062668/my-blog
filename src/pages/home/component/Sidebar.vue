@@ -12,6 +12,7 @@
 	</div>
 </template>
 <script>
+import './base.js';
 export default {
 	data() {
 		return {
@@ -19,16 +20,8 @@ export default {
 		};
 	},
 	created() {
-		function sum(...m) {
-			let total = 0;
-			for (let i of m) {
-				total += i;
-			}
-			console.log(`total=${total}`);
-		}
-		sum(1, 23, 45, 5);
-		this.axiosGet();
-		this.axiosPost();
+		// this.axiosGet();
+		// this.axiosPost();
 	},
 	methods: {
 		axiosGet() {

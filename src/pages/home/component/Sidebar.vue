@@ -20,16 +20,12 @@ export default {
 		};
 	},
 	created() {
-		// this.axiosGet();
+		this.axiosGet();
 		// this.axiosPost();
 	},
 	methods: {
 		axiosGet() {
-			this.$axios.get('../index.html', {
-				params: {
-					id: 1
-				}
-			})
+			this.$axios.get('/articleType')
 				.then(function(response) {
 					console.log(response);
 				})

@@ -5,18 +5,19 @@
 			<router-link tag="li"
 				v-for="item in tags"
 				:to="{name: 'TagIndex', params:{tagName: item}}"
-				:key="item" >
-				{{item}}
+				:key="item.id">
+				{{item.name}}
 			</router-link>
 		</ul>
 	</div>
 </template>
 <script>
 import './base.js';
+import { mapMutations } from 'vuex';
 export default {
 	data() {
 		return {
-			tags: ['Git', 'jQuery', 'ES6', 'node']
+			tags: []
 		};
 	},
 	created() {
@@ -24,12 +25,22 @@ export default {
 		// this.axiosPost();
 	},
 	methods: {
+		...mapMutations([
+			'increment'
+		]),
 		axiosGet() {
 			this.$axios.get('/articleType')
-				.then(function(response) {
-					console.log(response);
+				.then(res => {
+					this.increment();
+					if (res.status === 200) {
+						res = res.data.result;
+						this.tags = res.list;
+					} else {
+						console.log(res);
+					}
+					console.log(res);
 				})
-				.catch(function(error) {
+				.catch(error => {
 					console.log(error);
 				});
 		},

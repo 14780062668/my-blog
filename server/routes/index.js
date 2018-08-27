@@ -34,7 +34,7 @@ router.get('/articleType', function (req, res, next) {
 		console.log(err, data);
 		if (err) {
 			res.json({
-				status: '1',
+				status: '-1',
 				msg: err.message
 			});
 		} else {

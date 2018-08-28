@@ -31,7 +31,7 @@ mongoose.connection.on("disconnected", function () {
 /* GET home page. */
 router.get('/articleType', function (req, res, next) {
 	ArticleType.find({}, function (err, data) {
-		console.log(err, data);
+		// console.log(err, data);
 		if (err) {
 			res.json({
 				status: '-1',

@@ -1,7 +1,7 @@
 <template>
 	<div class="blog-list fl">
 		<div class="title">
-			<h2>{{title}}</h2>
+			<h2>{{titleObj[this.$route.name]}}</h2>
 		</div>
 		<ul class="list-box">
 			<li v-for="item in num" :key="item">
@@ -32,23 +32,16 @@ export default {
 	data() {
 		return {
 			num: 10,
-			title: '最新博文'
+			titleObj: {
+				HomeIndex: '最新博文',
+				NoteIndex: '前端笔记',
+				LiveIndex: '生活日记',
+				TagIndex: `标签: ${this.$route.params.tagName}`
+			}
 		};
 	},
 	created() {
-		switch (this.$route.name) {
-		case 'NoteIndex':
-			this.title = '前端笔记';
-			break;
-		case 'LiveIndex':
-			this.title = '生活日记';
-			break;
-		case 'TagIndex':
-			this.title = `标签: ${this.$route.params.tagName}`;
-			break;
-		default:
-			this.title = '最新博文';
-		}
+		console.log(this.$route);
 	}
 };
 </script>

@@ -7,6 +7,7 @@ const logger = require('morgan');
 const swig = require('swig');
 const debug = require('debug')('server:server');
 
+
 const indexRouter = require('./server/routes');
 const usersRouter = require('./server/routes/users');
 
@@ -24,7 +25,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
-	console.log('Request Type:', req.method);
+	console.log('Request path:', req.path);
+	console.log('Request params:', req.params);
+	console.log('logger==', logger);
+	// if(req.params){
+	// 	logger(`params: ${params}`);
+	// }
   if (req.method == 'OPTIONS') {
     res.send(200); /*让options请求快速返回*/
   } else {
@@ -43,7 +49,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
 	// set locals, only providing error in development
-	logger.info(err);
+	// logger.info(err);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
@@ -63,11 +69,6 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

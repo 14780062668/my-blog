@@ -28,20 +28,26 @@ export default {
 			'increment'
 		]),
 		axiosGet() {
-			this.$axios.get('/articleType')
-				.then(res => {
-					this.increment();
-					if (res.status === 200) {
-						res = res.data.result;
-						this.tags = res.list;
-					} else {
-						console.log(res);
-					}
-					console.log(res);
-				})
-				.catch(error => {
-					console.log(error);
-				});
+			// this.$axios.get('/articleType')
+			// 	.then(res => {
+			// 		this.increment();
+			// 		if (res.status === 200) {
+			// 			res = res.data.result;
+			// 			this.tags = res.list;
+			// 		} else {
+			// 			console.log(res);
+			// 		}
+			// 		console.log(res);
+			// 	})
+			// 	.catch(error => {
+			// 		console.log(error);
+			// 	});
+			this.$http.articleType().then((data) => {
+				console.log(data);
+			}).catch(err => {
+				console.log(err);
+			});
+			// 接口名（｛请求参数｝）.then（successCallback）.catch（failedCallback）就行了！
 		},
 		axiosPost() {
 			this.$axios.post('../index.html', {

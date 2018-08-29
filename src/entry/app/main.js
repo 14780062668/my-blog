@@ -2,9 +2,9 @@ import Vue from 'vue';
 import App from './App';
 import router from '@/router';
 import store from '../../store/index.js';
-import axios from 'axios';
 import VueLazyload from 'vue-lazyload';
 import '@/static/css/default.styl';
+import api from '../../../axios';
 
 // 引入element-ui组件
 import ElementUI from 'element-ui';
@@ -17,8 +17,8 @@ Vue.use(VueLazyload, {
 	loading: 'dist/loading.gif'
 });
 
-Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
+Vue.use(api);
 
 /* eslint-disable no-new */
 new Vue({

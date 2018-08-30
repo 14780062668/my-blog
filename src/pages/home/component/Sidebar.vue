@@ -12,7 +12,6 @@
 	</div>
 </template>
 <script>
-import { mapMutations } from 'vuex';
 export default {
 	data() {
 		return {
@@ -20,65 +19,52 @@ export default {
 		};
 	},
 	created() {
-		this.axiosGet();
-		// this.axiosPost();
+		this.getArticleType();
 	},
 	methods: {
-		...mapMutations([
-			'increment'
-		]),
-		axiosGet() {
-			// this.$axios.get('/articleType')
-			// 	.then(res => {
-			// 		this.increment();
-			// 		if (res.status === 200) {
-			// 			res = res.data.result;
-			// 			this.tags = res.list;
-			// 		} else {
-			// 			console.log(res);
-			// 		}
-			// 		console.log(res);
-			// 	})
-			// 	.catch(error => {
-			// 		console.log(error);
-			// 	});
-			this.$http.articleType().then((data) => {
-				console.log(data);
+		getArticleType() {
+			this.$http.articleType().then(res => {
+				res = res.data;
+				if (res.status === '200') {
+					res = res.result;
+					this.tags = res.list;
+				} else {
+					this.$store.commit('message', {
+						type: 'error',
+						message: res.msg
+					});
+				}
 			}).catch(err => {
-				console.log(err);
-			});
-			// 接口名（｛请求参数｝）.then（successCallback）.catch（failedCallback）就行了！
-		},
-		axiosPost() {
-			this.$axios.post('../index.html', {
-				id: 1
-			})
-				.then(function(response) {
-					console.log(response);
-				})
-				.catch(function(error) {
-					console.log(error);
+				this.$store.commit('message', {
+					type: 'error',
+					message: err.msg
 				});
+			});
 		}
 	}
 };
 </script>
 <style lang="stylus" scoped>
-h3
-	color #666
-	border-bottom 1px solid #eaeaea
-	background #fbfbfb
-	margin 0
-	padding 10px 15px 12px
-.items
-	overflow hidden
-	padding 14px
-	li
-		background #f6f6f6
-		float left
-		width 32.3%
-		margin 0 1% 1% 0
-		padding 6px 0
-		text-indent 10px
-		cursor pointer
+h3 {
+	color: #666;
+	border-bottom: 1px solid #eaeaea;
+	background: #fbfbfb;
+	margin: 0;
+	padding: 10px 15px 12px;
+}
+
+.items {
+	overflow: hidden;
+	padding: 14px;
+
+	li {
+		background: #f6f6f6;
+		float: left;
+		width: 32.3%;
+		margin: 0 1% 1% 0;
+		padding: 6px 0;
+		text-indent: 10px;
+		cursor: pointer;
+	}
+}
 </style>

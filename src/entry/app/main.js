@@ -4,7 +4,7 @@ import router from '@/router';
 import store from '../../store/index.js';
 import VueLazyload from 'vue-lazyload';
 import '@/static/css/default.styl';
-import api from '../../../axios';
+import api from '../../axios/index.js';
 
 // 引入element-ui组件
 import ElementUI from 'element-ui';

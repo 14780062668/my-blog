@@ -15,6 +15,9 @@ export default {
 	components: {
 		HeaderComponent,
 		FooterComponent
+	},
+	created() {
+		window.vm = this;
 	}
 };
 </script>

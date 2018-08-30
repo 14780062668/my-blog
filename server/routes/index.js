@@ -1,7 +1,9 @@
+import { articleType } from '../models/index.js';
+
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const ArticleType = require('../models/index');
+// const type = require('../models/index');
 
 //连接MongoDB数据库
 mongoose.connect('mongodb://127.0.0.1:27017/article');
@@ -28,10 +30,29 @@ mongoose.connection.on("disconnected", function () {
 //   });
 // });
 
-/* GET home page. */
 router.get('/articleType', function (req, res, next) {
-	ArticleType.find({}, function (err, data) {
+	articleType.find({}, function (err, data) {
 		// console.log(err, data);
+		if (err) {
+			res.json({
+				status: '-1',
+				msg: err.message
+			});
+		} else {
+			res.json({
+				status: '200',
+				msg: '返回成功',
+				result: {
+					sizes: data.length,
+					list: data
+				}
+			});
+		}
+	});
+});
+
+router.get('/largeType', function (req, res, next) {
+	articleType.find({}, function (err, data) {
 		if (err) {
 			res.json({
 				status: '-1',

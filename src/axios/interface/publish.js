@@ -5,7 +5,7 @@ const articleType = (params) => {
 		url: '/articleType',
 		methods: 'get',
 		params
-	})
+	});
 };
 export default {
 	articleType

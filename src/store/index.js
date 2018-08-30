@@ -10,6 +10,31 @@ const store = new Vuex.Store({
 		increment(state) {
 			state.count++;
 			console.log(`state.count===${state.count}`);
+		},
+		message(state, obj) {
+			/**
+			 * tip
+			 */
+			const { type, message } = obj;
+			switch (type) {
+			case 'success':
+				vm.$message({
+					message,
+					type
+				});
+				break;
+			case 'warning':
+				vm.$message({
+					type,
+					message
+				});
+				break;
+			case 'error':
+				vm.$message.error(message);
+				break;
+			default:
+				vm.$message(message);
+			}
 		}
 	}
 });

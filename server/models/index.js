@@ -4,17 +4,17 @@ const Schema = mongoose.Schema;
 const articleType = new Schema({
   "id":String,
 	"name":String,
-	"createDate": Number
+	"createTime": Number
 });
-const article = new Schema({
-  "id":{type:String},
-  "articleName":String,
-  "title":Number,
-  "content":String,
-	"createDate":Number,
-	"author": String,
-	"authorId": String,
-  "editDate":String
+const largeType = new Schema({
+  "id": String,
+  "name": String,
+	"createTime":Number
 });
 
-module.exports = mongoose.model('articleType',articleType);
+
+export default {
+	articleType: mongoose.model('articleType', articleType),
+	largeType: mongoose.model('largeType', largeType)
+};
+// module.exports = mongoose.model('articleType',articleType);

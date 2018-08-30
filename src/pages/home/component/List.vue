@@ -42,6 +42,28 @@ export default {
 	},
 	created() {
 		console.log(this.$route);
+		this.getLargeType();
+	},
+	methods: {
+		getLargeType() {
+			this.$http.getLargeType().then(res => {
+				res = res.data;
+				if (res.status === '200') {
+					res = res.result;
+					this.tags = res.list;
+				} else {
+					this.$store.commit('message', {
+						type: 'error',
+						message: res.msg
+					});
+				}
+			}).catch(err => {
+				this.$store.commit('message', {
+					type: 'error',
+					message: err.msg
+				});
+			});
+		}
 	}
 };
 </script>

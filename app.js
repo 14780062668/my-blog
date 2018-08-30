@@ -27,10 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
 	console.log('Request path:', req.path);
 	console.log('Request params:', req.params);
-	console.log('logger==', logger);
-	// if(req.params){
-	// 	logger(`params: ${params}`);
-	// }
   if (req.method == 'OPTIONS') {
     res.send(200); /*让options请求快速返回*/
   } else {

@@ -6,7 +6,7 @@ const articleType = new Schema({
 	"name":String,
 	"createTime": Number
 });
-const articleList = new Schema({
+const articleTag = new Schema({
   "id": String,
 	"name": String,
 	"tagId": String,
@@ -18,6 +18,6 @@ const articleList = new Schema({
 });
 const models = {
 	articleType: mongoose.model('articleType', articleType),
-	articleList: mongoose.model('articleList', articleList)
+	articleTag: mongoose.model('articleTag', articleTag)
 };
 module.exports = models;

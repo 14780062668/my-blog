@@ -46,7 +46,7 @@ export default {
 	},
 	methods: {
 		getArticleList() {
-			this.$http.articleList({
+			this.$http.articleTag({
 				id: 1
 			}).then(res => {
 				res = res.data;

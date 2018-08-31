@@ -15,7 +15,8 @@ const store = new Vuex.Store({
 			/**
 			 * tip
 			 */
-			const { type, message } = obj;
+			let { type, message } = obj;
+			console.log('$message===', obj);
 			switch (type) {
 			case 'success':
 				vm.$message({
@@ -30,6 +31,7 @@ const store = new Vuex.Store({
 				});
 				break;
 			case 'error':
+				message = message || '请求错误';
 				vm.$message.error(message);
 				break;
 			default:

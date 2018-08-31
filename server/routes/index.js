@@ -49,8 +49,8 @@ router.get('/articleType', function (req, res, next) {
 	});
 });
 
-router.post('/articleList', function (req, res, next) {
-	models.articleList.find({}, function (err, data) {
+router.post('/articleTag', function (req, res, next) {
+	models.articleTag.find({}, function (err, data) {
 		if (err) {
 			res.json({
 				status: '-1',

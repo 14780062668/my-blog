@@ -118,11 +118,9 @@ export default function $axios(options) {
 		//请求处理
 		instance(options)
 			.then((res) => {
-				console.log('res===', res);
 				resolve(res)
 				return false
-			})
-			.catch((error) => {
+			}).catch((error) => {
 				reject(error)
 			})
 	})

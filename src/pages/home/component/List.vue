@@ -46,7 +46,7 @@ export default {
 	},
 	methods: {
 		getArticleList() {
-			this.$http.articleTag({
+			this.$post('/articleTag', {
 				id: 1
 			}).then(res => {
 				res = res.data;
@@ -59,11 +59,6 @@ export default {
 						message: res.msg
 					});
 				}
-			}).catch(err => {
-				this.$store.commit('message', {
-					type: 'error',
-					message: err.msg
-				});
 			});
 		}
 	}

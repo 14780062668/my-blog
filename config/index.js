@@ -1,22 +1,16 @@
 'use strict'
-// Template version: 1.3.1
-// see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
 console.log('process.env===', process.env);
+const proxyTable = require('../common/api');
 
 module.exports = {
   dev: {
 
     // Paths
     assetsSubDirectory: 'static', // 子目录，放css js img
-    assetsPublicPath: '/', // 根目录
-    proxyTable: {	// 可利用这个解决跨域
-			'/articleType':{
-				target:'http://localhost:3000',
-				changeOrigin: true
-			},
-		}, 
+		assetsPublicPath: '/', // 根目录
+		proxyTable, // 解决跨域
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

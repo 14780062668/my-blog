@@ -4,7 +4,7 @@ import router from '@/router';
 import store from '../../store/index.js';
 import VueLazyload from 'vue-lazyload';
 import '@/static/css/default.styl';
-import api from '../../axios/index.js';
+import api from '../../axios';
 
 // 引入element-ui组件
 import ElementUI from 'element-ui';
@@ -18,8 +18,10 @@ Vue.use(VueLazyload, {
 });
 
 Vue.config.productionTip = false;
-Vue.use(api);
-
+// axios 请求类型 代理到vue上
+for (let key in api) {
+	Vue.prototype['$' + key] = api[key];
+}
 /* eslint-disable no-new */
 new Vue({
 	el: '#app',

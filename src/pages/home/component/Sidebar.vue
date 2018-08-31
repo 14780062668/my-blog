@@ -23,7 +23,7 @@ export default {
 	},
 	methods: {
 		getArticleType() {
-			this.$http.articleType().then(res => {
+			this.$get('/articleType').then(res => {
 				res = res.data;
 				if (res.status === '200') {
 					res = res.result;
@@ -34,11 +34,6 @@ export default {
 						message: res.msg
 					});
 				}
-			}).catch(err => {
-				this.$store.commit('message', {
-					type: 'error',
-					message: err.msg
-				});
 			});
 		}
 	}

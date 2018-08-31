@@ -8,7 +8,7 @@ const CancelToken = axios.CancelToken;
 // 请求拦截器
 axios.interceptors.request.use(config => {
 	// 发起请求时，取消掉当前正在进行的相同请求
-	if (promiseArr[config.url]) {
+	if(promiseArr[config.url]) {
 		promiseArr[config.url]('操作取消');
 		promiseArr[config.url] = cancel;
 	} else {
@@ -30,7 +30,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
 	return response;
 }, err => {
-	if (err && err.response) {
+	if(err && err.response) {
 		switch (err.response.status) {
 		case 400:
 			err.message = '错误请求';

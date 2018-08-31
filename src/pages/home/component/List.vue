@@ -1,6 +1,6 @@
 <template>
 	<div class="blog-list fl">
-		<div class="title">
+		<div class="title" v-if="!$store.state.searchVal">
 			<h2>{{titleObj[this.$route.name]}}</h2>
 		</div>
 		<ul class="list-box">
@@ -50,7 +50,7 @@ export default {
 				id: 1
 			}).then(res => {
 				res = res.data;
-				if (res.status === '200') {
+				if(res.status === '200') {
 					res = res.result;
 					this.tags = res.list;
 				} else {

@@ -4,12 +4,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
 	state: {
-		count: 1
+		name: '断笔画神',
+		searchVal: '',
+		tags: []
 	},
 	mutations: {
-		increment(state) {
-			state.count++;
-			console.log(`state.count===${state.count}`);
+		changeSearch(state, val) {
+			state.searchVal = val;
+		},
+		changeTags(state, val) {
+			state.tags = val;
 		},
 		message(state, obj) {
 			/**

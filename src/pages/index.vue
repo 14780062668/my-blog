@@ -12,7 +12,7 @@ export default {
 		};
 	},
 	created() {
-		if (this.$route.path === '/' || this.$route.path === '') {
+		if(this.$route.path === '/' || this.$route.path === '') {
 			this.$router.push({ path: '/home' });
 		}
 	}

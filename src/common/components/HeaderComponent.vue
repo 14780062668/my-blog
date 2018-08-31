@@ -2,7 +2,8 @@
 	<header>
 		<div class="header-box">
 			<router-link class="logo fl" to="/home">
-				<i class="iconfont icon-pic-blog"></i>老猿的博客
+				<i class="iconfont icon-pic-blog"></i>
+				{{$store.state.name}}的博客
 			</router-link>
 			<nav class="fr">
 				<router-link to="/home">
@@ -17,6 +18,9 @@
 				<router-link to="/introduction">
 					自我介绍
 				</router-link>
+				<router-link to="/edit_article">
+					写文章
+				</router-link>
 			</nav>
 		</div>
 	</header>
@@ -26,14 +30,9 @@ export default {
 	name: 'Header',
 	data() {
 		return {
-			count: 10
 		};
 	},
 	methods: {
-		add() {
-			this.count++;
-			console.log(this.count);
-		}
 	}
 };
 </script>
@@ -45,11 +44,10 @@ export default {
 			font-size 40px
 			vertical-align middle
 	nav
-		float right
 		overflow hidden
 		a
 			float left
-			padding 0 40px
+			padding 0 36px
 			&:hover
 				background #037cce
 		.router-link-active

@@ -2,8 +2,10 @@
 	<div class="search-box">
 			<el-input
 				placeholder="请输入内容"
-				suffix-icon="el-icon-search"
+				@keyup.enter.native="search"
 				v-model="searchVal">
+				<i slot="suffix" class="el-input__icon el-icon-search"
+					@click="search"></i>
 			</el-input>
 		</div>
 </template>
@@ -13,6 +15,14 @@ export default {
 		return {
 			searchVal: ''
 		};
+	},
+	methods: {
+		search() {
+			this.$store.commit('changeSearch', this.searchVal);
+		}
+	},
+	destroyed() {
+		this.$store.commit('changeSearch', '');
 	}
 };
 </script>

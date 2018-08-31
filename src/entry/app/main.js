@@ -19,7 +19,7 @@ Vue.use(VueLazyload, {
 
 Vue.config.productionTip = false;
 // axios 请求类型 代理到vue上
-for (let key in api) {
+for(let key in api) {
 	Vue.prototype['$' + key] = api[key];
 }
 /* eslint-disable no-new */

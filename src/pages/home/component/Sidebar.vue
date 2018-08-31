@@ -3,7 +3,7 @@
 		<h3>热门标签</h3>
 		<ul class="items">
 			<router-link tag="li"
-				v-for="item in tags"
+				v-for="item in $store.state.tags"
 				:to="{name: 'TagIndex', params:{tagName: item.id}}"
 				:key="item.id">
 				{{item.name}}
@@ -15,27 +15,11 @@
 export default {
 	data() {
 		return {
-			tags: []
 		};
 	},
 	created() {
-		this.getArticleType();
 	},
 	methods: {
-		getArticleType() {
-			this.$get('/api/articleType').then(res => {
-				res = res.data;
-				if (res.status === '200') {
-					res = res.result;
-					this.tags = res.list;
-				} else {
-					this.$store.commit('message', {
-						type: 'error',
-						message: res.msg
-					});
-				}
-			});
-		}
 	}
 };
 </script>

@@ -4,9 +4,9 @@
 		<ul class="items">
 			<router-link tag="li"
 				v-for="item in $store.state.tags"
-				:to="{name: 'TagIndex', params:{tagName: item.id}}"
+				:to="{name: 'TagIndex', params:{tagId: item.id }}"
 				:key="item.id">
-				{{item.name}}
+				<span>{{item.name}}</span>
 			</router-link>
 		</ul>
 	</div>
@@ -24,26 +24,21 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-h3 {
-	color: #666;
-	border-bottom: 1px solid #eaeaea;
-	background: #fbfbfb;
-	margin: 0;
-	padding: 10px 15px 12px;
-}
-
-.items {
-	overflow: hidden;
-	padding: 14px;
-
-	li {
-		background: #f6f6f6;
-		float: left;
-		width: 32.3%;
-		margin: 0 1% 1% 0;
-		padding: 6px 0;
-		text-indent: 10px;
-		cursor: pointer;
-	}
-}
+h3
+	border-bottom 1px solid #eaeaea
+	padding 10px 15px 12px
+	text-align center
+.items
+	overflow hidden
+	padding 20px 12px 10px
+	li
+		float left
+		margin 0 0 10px 10px
+		cursor pointer
+		text-align center
+		span
+			color #1e94e5
+			padding 0 10px
+			&:hover
+				text-decoration underline
 </style>

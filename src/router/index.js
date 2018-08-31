@@ -35,7 +35,7 @@ let router = new Router({
 			name: 'LiveIndex',
 			component: LiveIndex
 		}, {
-			path: '/tag/:tagName',
+			path: '/tag/:tagId',
 			name: 'TagIndex',
 			component: TagIndex
 		}, {

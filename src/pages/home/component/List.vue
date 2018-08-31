@@ -1,7 +1,7 @@
 <template>
 	<div class="blog-list fl">
 		<div class="title" v-if="!$store.state.searchVal">
-			<h2>{{titleObj[this.$route.name]}}</h2>
+			<h2>{{name}}</h2>
 		</div>
 		<ul class="list-box">
 			<li v-for="item in num" :key="item">
@@ -31,14 +31,30 @@
 export default {
 	data() {
 		return {
-			num: 10,
-			titleObj: {
-				HomeIndex: '最新博文',
-				NoteIndex: '前端笔记',
-				LiveIndex: '生活日记',
-				TagIndex: `标签: ${this.$route.params.tagName}`
-			}
+			num: 10
 		};
+	},
+	computed: {
+		name() {
+			let name = '';
+			switch (this.$route.name) {
+			case 'HomeIndex':
+				name = '最新博文';
+				break;
+			case 'NoteIndex':
+				name = '前端笔记';
+				break;
+			case 'LiveIndex':
+				name = '生活日记';
+				break;
+			default:
+				let index = this.$store.state.tags.findIndex(val => {
+					return val.id === this.$route.params.tagId;
+				});
+				name = index > -1 ? this.$store.state.tags[index].name : '';
+			}
+			return name;
+		}
 	},
 	created() {
 		console.log(this.$route);
@@ -49,7 +65,6 @@ export default {
 			this.$post('/api/articleList', {
 				id: 1
 			}).then(res => {
-				res = res.data;
 				if(res.status === '200') {
 					res = res.result;
 					this.tags = res.list;

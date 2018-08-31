@@ -4,13 +4,12 @@ export default {
 	},
 	created() {
 		if(this.$store.state.tags.length === 0) {
-			this.getArticleType();
+			this.getArticleTag();
 		}
 	},
 	methods: {
-		getArticleType() {
-			this.$get('/api/articleType').then(res => {
-				res = res.data;
+		getArticleTag() {
+			this.$get('/api/articleTag').then(res => {
 				if(res.status === '200') {
 					res = res.result;
 					this.$store.commit('changeTags', res.list);

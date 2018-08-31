@@ -39,7 +39,7 @@ router.get('/api/articleType', function (req, res, next) {
 	});
 });
 // 文章标签
-router.post('/api/articleTag', function (req, res, next) {
+router.get('/api/articleTag', function (req, res, next) {
 	models.articleTag.find({}, function (err, data) {
 		if (err) {
 			res.json({

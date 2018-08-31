@@ -10,6 +10,7 @@ import NoteIndex from '@/pages/note/index';
 import LiveIndex from '@/pages/live/index';
 import IntroductionIndex from '@/pages/introduction/index';
 import TagIndex from '@/pages/tag/index';
+import EditArticleIndex from '@/pages/editArticle/index';
 
 Vue.use(Router);
 let router = new Router({
@@ -41,6 +42,10 @@ let router = new Router({
 			path: '/introduction',
 			name: 'IntroductionIndex',
 			component: IntroductionIndex
+		}, {
+			path: '/edit_article',
+			name: 'EditArticleIndex',
+			component: EditArticleIndex
 		}, {
 			path: '*',
 			component: NotFoundComponent

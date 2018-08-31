@@ -6,7 +6,7 @@
  * @Description: 将 axios 封装成 Vue 的插件使用
  */
 
-import apiPublish from './interface/publish.js';
+import apiInterface from './interface';
 
 const install = Vue => {
 	if (install.installed) return;
@@ -18,15 +18,18 @@ const install = Vue => {
 				// PS: 这里没有区分命名空间
 				return Object.assign(
 					{},
-					apiPublish
+					apiInterface
 				);
 				// 如果需要区分命令空间的话可以参考以下写法
 				// {
-				//     apiLogin,
+				//     apiInterface,
 				//     apiRegister,
 				//     apiPublish
 				// }
 			}
+		},
+		post() {
+			console.log(222);
 		}
 	});
 };

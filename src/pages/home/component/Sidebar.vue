@@ -4,7 +4,7 @@
 		<ul class="items">
 			<router-link tag="li"
 				v-for="item in tags"
-				:to="{name: 'TagIndex', params:{tagName: item}}"
+				:to="{name: 'TagIndex', params:{tagName: item.id}}"
 				:key="item.id">
 				{{item.name}}
 			</router-link>

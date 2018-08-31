@@ -1,9 +1,7 @@
-import { articleType } from '../models/index.js';
-
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-// const type = require('../models/index');
+const models = require('../models/index');
 
 //连接MongoDB数据库
 mongoose.connect('mongodb://127.0.0.1:27017/article');
@@ -31,7 +29,7 @@ mongoose.connection.on("disconnected", function () {
 // });
 
 router.get('/articleType', function (req, res, next) {
-	articleType.find({}, function (err, data) {
+	models.articleType.find({}, function (err, data) {
 		// console.log(err, data);
 		if (err) {
 			res.json({
@@ -51,8 +49,8 @@ router.get('/articleType', function (req, res, next) {
 	});
 });
 
-router.get('/largeType', function (req, res, next) {
-	articleType.find({}, function (err, data) {
+router.post('/articleList', function (req, res, next) {
+	models.articleList.find({}, function (err, data) {
 		if (err) {
 			res.json({
 				status: '-1',

@@ -7,6 +7,11 @@ const articleType = (params) => {
 		params
 	});
 };
+const articleList = (params) => {
+	console.log('params', params);
+	return axios.post('/articleList', params);
+};
 export default {
-	articleType
+	articleType,
+	articleList
 };

@@ -42,11 +42,13 @@ export default {
 	},
 	created() {
 		console.log(this.$route);
-		this.getLargeType();
+		this.getArticleList();
 	},
 	methods: {
-		getLargeType() {
-			this.$http.getLargeType().then(res => {
+		getArticleList() {
+			this.$http.articleList({
+				id: 1
+			}).then(res => {
 				res = res.data;
 				if (res.status === '200') {
 					res = res.result;

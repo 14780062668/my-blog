@@ -1,6 +1,6 @@
 <template>
-	<div class="header-box">
-		<header>
+	<header>
+		<div class="header-box">
 			<router-link class="logo fl" to="/home">
 				<i class="iconfont icon-pic-blog"></i>老猿的博客
 			</router-link>
@@ -18,8 +18,8 @@
 					自我介绍
 				</router-link>
 			</nav>
-		</header>
-	</div>
+		</div>
+	</header>
 </template>
 <script>
 export default {

@@ -5,24 +5,24 @@
 		</div>
 		<ul class="list-box">
 			<li v-for="item in num" :key="item">
-				<a href="javascript:void(0)" class="list-img fl">
-					<img src="http://jspang.com/wp-content/uploads/2018/06/typescriptlogo.jpg" />
-				</a>
-				<div class="fl list-msg">
-					<h3>TypeScript免费视频教程 ，Deno前置知识 </h3>
-					<p class="meta">
-						<time><i class="el-icon-time"></i>2018-06-27</time>
-						<span class="author">
-							<i class="iconfont icon-yonghu"></i>
-							<a href="http://jspang.com/author/jspang001/">技术胖</a>
-						</span>
-						<span class="pv"><i class="el-icon-view"></i>阅读(7682)</span>
-						<a class="pc" href="#">
-							<i class="iconfont icon-pinglun"></i>评论(29)
-						</a>
-					</p>
-					<p class="note">第01节：初识TypeScript Deno都要来了，还不学TypeScript？ 近日Node.js之父瑞安达尔（Ryan Dahl）发布新的开源项目 deno，从官方介绍来看，可以认为它是下一代 Node，使用 Go 语言代替 C++ ...</p>
-				</div>
+				<h3>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-JS"></use>
+					</svg>
+					TypeScript免费视频教程 ，Deno前置知识
+				</h3>
+				<p class="note">第01节：初识TypeScript Deno都要来了，还不学TypeScript？ 近日Node.js之父瑞安达尔（Ryan Dahl）发布新的开源项目 deno，从官方介绍来看，可以认为它是下一代 Node，使用 Go 语言代替 C++ ...</p>
+				<p class="meta">
+					<time><i class="el-icon-time"></i>2018-06-27</time>
+					<span class="author">
+						<i class="iconfont icon-yonghu"></i>
+						<a href="http://jspang.com/author/jspang001/">技术胖</a>
+					</span>
+					<span class="pv"><i class="el-icon-view"></i>阅读(7682)</span>
+					<a class="pc" href="#">
+						<i class="iconfont icon-pinglun"></i>评论(29)
+					</a>
+				</p>
 			</li>
 		</ul>
 	</div>
@@ -46,7 +46,7 @@ export default {
 	},
 	methods: {
 		getArticleList() {
-			this.$post('/articleTag', {
+			this.$post('/api/articleList', {
 				id: 1
 			}).then(res => {
 				res = res.data;

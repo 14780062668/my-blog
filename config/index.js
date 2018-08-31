@@ -1,16 +1,19 @@
 'use strict'
 
 const path = require('path')
-console.log('process.env===', process.env);
-const proxyTable = require('../common/api');
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static', // 子目录，放css js img
 		assetsPublicPath: '/', // 根目录
-		proxyTable, // 解决跨域
+		// 解决跨域
+		proxyTable: {
+			'/api/':{
+				target:'http://localhost:3000',
+				changeOrigin: true
+			}
+		},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

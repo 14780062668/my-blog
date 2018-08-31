@@ -23,7 +23,7 @@ export default {
 	},
 	methods: {
 		getArticleType() {
-			this.$get('/articleType').then(res => {
+			this.$get('/api/articleType').then(res => {
 				res = res.data;
 				if (res.status === '200') {
 					res = res.result;

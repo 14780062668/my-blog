@@ -9,7 +9,7 @@ import api from '../../axios';
 // 引入element-ui组件
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import '@/static/iconfont/iconfont.css';
+import '../../../static/iconfont/iconfont.js';
 
 Vue.use(ElementUI);
 Vue.use(VueLazyload, {

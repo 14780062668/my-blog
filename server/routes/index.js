@@ -18,19 +18,9 @@ mongoose.connection.on("disconnected", function () {
 	console.log("MongoDB connected disconnected.")
 });
 
-
-// router.get('/xxx',function(){
-
-// 	let data = new ArticleType({id:"88",name:"xxx"});
-// 	data.save(function (err, fluffy) {
-// 		if (err) return console.error(err);
-// 		console.log(err, fluffy);
-//   });
-// });
-
-router.get('/articleType', function (req, res, next) {
+//  文章类型
+router.get('/api/articleType', function (req, res, next) {
 	models.articleType.find({}, function (err, data) {
-		// console.log(err, data);
 		if (err) {
 			res.json({
 				status: '-1',
@@ -48,9 +38,29 @@ router.get('/articleType', function (req, res, next) {
 		}
 	});
 });
-
-router.post('/articleTag', function (req, res, next) {
+// 文章标签
+router.post('/api/articleTag', function (req, res, next) {
 	models.articleTag.find({}, function (err, data) {
+		if (err) {
+			res.json({
+				status: '-1',
+				msg: err.message
+			});
+		} else {
+			res.json({
+				status: '200',
+				msg: '返回成功',
+				result: {
+					sizes: data.length,
+					list: data
+				}
+			});
+		}
+	});
+});
+// 文章列表
+router.post('/api/articleList', function (req, res, next) {
+	models.articleList.find({}, function (err, data) {
 		if (err) {
 			res.json({
 				status: '-1',

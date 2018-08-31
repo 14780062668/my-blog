@@ -6,7 +6,7 @@
 	</div>
 </template>
 <script>
-import Search from '../component/Search.vue';
+import Search from '../../common/components/Search.vue';
 import List from './component/List.vue';
 import Sidebar from './component/Sidebar.vue';
 export default {

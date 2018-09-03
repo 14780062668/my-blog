@@ -4,34 +4,51 @@
 			<h2>{{name}}</h2>
 		</div>
 		<ul class="list-box">
-			<li v-for="item in num" :key="item">
+			<li v-for="item in list" :key="item.id">
 				<h3>
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-JS"></use>
-					</svg>
-					TypeScript免费视频教程 ，Deno前置知识
+					<type-icon :tagId="item.tagId" />
+					{{item.title}}
 				</h3>
-				<p class="note">第01节：初识TypeScript Deno都要来了，还不学TypeScript？ 近日Node.js之父瑞安达尔（Ryan Dahl）发布新的开源项目 deno，从官方介绍来看，可以认为它是下一代 Node，使用 Go 语言代替 C++ ...</p>
+				<p class="note">{{item.content}}</p>
 				<p class="meta">
-					<time><i class="el-icon-time"></i>2018-06-27</time>
+					<time>
+						<i class="el-icon-time"></i>
+						{{item.createTime | formatTime}}
+					</time>
 					<span class="author">
 						<i class="iconfont icon-yonghu"></i>
-						<a href="http://jspang.com/author/jspang001/">技术胖</a>
+						<a href="http://jspang.com/author/jspang001/">{{item.author}}</a>
 					</span>
-					<span class="pv"><i class="el-icon-view"></i>阅读(7682)</span>
+					<span class="pv"><i class="el-icon-view"></i>阅读 ( {{item.readNumber}} )</span>
 					<a class="pc" href="#">
-						<i class="iconfont icon-pinglun"></i>评论(29)
+						<i class="iconfont icon-pinglun"></i>评论 ( {{item.commentNumber}} )
 					</a>
 				</p>
 			</li>
 		</ul>
+		<el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage"
+      :page-sizes="sizes"
+      :page-size="pageSize"
+      :layout="layout"
+      :total="1000">
+    </el-pagination>
 	</div>
 </template>
 <script>
+import table from '../../../common/mixins/table.js';
+import TypeIcon from '../../../common/components/TypeIcon.vue';
 export default {
+	props: ['typeId', 'tagId'],
+	mixins: [ table ],
+	components: {
+		TypeIcon
+	},
 	data() {
 		return {
-			num: 10
+			list: []
 		};
 	},
 	computed: {
@@ -56,18 +73,32 @@ export default {
 			return name;
 		}
 	},
-	created() {
+	mounted() {
 		console.log(this.$route);
 		this.getArticleList();
 	},
 	methods: {
+		initData() {
+			this.getArticleList();
+		},
 		getArticleList() {
-			this.$post('/api/articleList', {
-				id: 1
-			}).then(res => {
+			let params = {
+				sort: 'createTime',
+				page: {
+					currentPage: this.currentPage,
+					pageSize: this.pageSize
+				}
+			};
+			if(this.typeId) {
+				params.typeId = this.typeId;
+			}
+			if(this.tagId) {
+				params.tagId = this.tagId;
+			}
+			this.$post('/api/articleList', params).then(res => {
 				if(res.status === '200') {
-					res = res.result;
-					this.tags = res.list;
+					let result = res.result;
+					this.list = result.list;
 				} else {
 					this.$store.commit('message', {
 						type: 'error',

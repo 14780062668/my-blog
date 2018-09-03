@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<search />
-		<list />
+		<list :typeId="1" />
 		<sidebar />
 	</div>
 </template>

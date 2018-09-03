@@ -11,6 +11,9 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '../../../static/iconfont/iconfont.js';
 
+// 引入filter
+import '../../tools/vue.filter.js';
+
 Vue.use(ElementUI);
 Vue.use(VueLazyload, {
 	error: 'dist/error.png',
@@ -22,6 +25,7 @@ Vue.config.productionTip = false;
 for(let key in api) {
 	Vue.prototype['$' + key] = api[key];
 }
+
 /* eslint-disable no-new */
 new Vue({
 	el: '#app',

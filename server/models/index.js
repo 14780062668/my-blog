@@ -13,17 +13,15 @@ const articleTag = new Schema({
 });
 const articleList = new Schema({
   "id": String,
-	"name": String,
-	"tagId": String,
-	"tagName": String,
+	"title": String,
+	"tagId": Array,
 	"typeId": String,
-	"typeName": String,
 	"author": String,
-	"commentNumber": String,
-	"readNumber": String,
 	"content": String,
-	"createTime": Number,
-	"editTime": Number	
+	"commentNumber": Number,
+	"readNumber": Number,
+	"createTime": String,
+	"editTime": String
 });
 const models = {
 	articleType: mongoose.model('articleType', articleType),

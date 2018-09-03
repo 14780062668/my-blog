@@ -30,10 +30,7 @@ router.get('/api/articleType', function (req, res, next) {
 			res.json({
 				status: '200',
 				msg: '返回成功',
-				result: {
-					sizes: data.length,
-					list: data
-				}
+				list: data
 			});
 		}
 	});
@@ -50,36 +47,132 @@ router.get('/api/articleTag', function (req, res, next) {
 			res.json({
 				status: '200',
 				msg: '返回成功',
-				result: {
-					sizes: data.length,
-					list: data
-				}
+				list: data
+			});
+		}
+	});
+});
+// 写文章
+router.post('/api/addArticle', function (req, res, next) {
+	const param = {
+		id: req.body.createTime.toString(),
+		commentNumber: 0,
+		readNumber: 0
+	}
+	req.body = Object.assign({}, req.body, param);
+	const monInsert = new models.articleList(req.body);
+	monInsert.save(function(err, data){
+		if(err){
+			console.log(err);
+			res.json({
+				status: '-1',
+				msg: err.message
+			});
+		}else{
+			console.log('成功插入数据');
+			res.json({
+				status: '200',
+				msg: '返回成功',
+				result: data
 			});
 		}
 	});
 });
 // 文章列表
+
+const promise = new Promise((resolve, reject) => {
+	resolve();
+});
 router.post('/api/articleList', function (req, res, next) {
-	models.articleList.find({}, function (err, data) {
-		if (err) {
-			res.json({
-				status: '-1',
-				msg: err.message
-			});
-		} else {
-			res.json({
-				status: '200',
-				msg: '返回成功',
-				result: {
-					sizes: data.length,
-					list: data
-				}
-			});
-		}
+	const { page, typeId, tagId, sort } = req.body;
+	const { currentPage, pageSize } = page;
+	let skip = (currentPage - 1) * pageSize;
+	let params = {};
+	if(typeId){
+		params.typeId = typeId;
+	}
+	if(tagId){
+		params.tagId = tagId;
+	}
+	let count = 0;
+	promise.then(() => {
+		let modelList = models.articleList.find(params);
+		modelList.count({}, (err, count) => {
+			if(err){
+				res.json({
+					status: '-1',
+					msg: err.message
+				});
+			}else{
+				count = count;
+			}
+			console.log('count==end', count);
+		});
+	}).then(()=> {
+		let modelList = models.articleList.find(params);
+		modelList.skip(skip).limit(pageSize);
+		modelList.sort({
+			[sort]: -1
+		});
+		modelList.exec((err, data) => {
+			console.log('counts==', count);
+			console.log('data==', data);
+			if (err) {
+				res.json({
+					status: '-1',
+					msg: err.message
+				});
+			} else {
+				console.log('counts==end2', count);
+				res.json({
+					status: '200',
+					msg: '返回成功',
+					result: {
+						currentPage: page.currentPage,
+						pageSize: page.pageSize, 
+						list: data,
+						total: count
+					}
+				});
+			}
+		});
 	});
+	// modelList.count({}, (err, count) => {
+	// 	if(err) {
+	// 		res.json({
+	// 			status: '-1',
+	// 			msg: err.message
+	// 		});
+	// 	}else{
+	// 		modelList.skip(skip).limit(pageSize);
+	// 		modelList.sort({
+	// 			[sort]: -1
+	// 		});
+	// 		modelList.exec((err, data) => {
+	// 			if (err) {
+	// 				res.json({
+	// 					status: '-1',
+	// 					msg: err.message
+	// 				});
+	// 			} else {
+	// 				res.json({
+	// 					status: '200',
+	// 					msg: '返回成功',
+	// 					result: {
+	// 						currentPage: page.currentPage,
+	// 						pageSize: page.pageSize, 
+	// 						list: data,
+	// 						total: count
+	// 					}
+	// 				});
+	// 			}
+	// 		});
+	// 	}
+	// });
+	
 });
 
-//查询商品列表数据
+// 查询商品列表数据
 router.get("/list", function (req, res, next) {
 	let page = parseInt(req.param("page"));
 	let pageSize = parseInt(req.param("pageSize"));

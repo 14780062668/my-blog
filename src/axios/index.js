@@ -109,5 +109,19 @@ export default {
 				resolve(res);
 			});
 		});
+	},
+	delete(url, param) {
+		return new Promise((resolve, reject) => {
+			axios({
+				method: 'delete',
+				url,
+				data: param,
+				cancelToken: new CancelToken(c => {
+					cancel = c;
+				})
+			}).then(res => {
+				resolve(res);
+			});
+		});
 	}
 };

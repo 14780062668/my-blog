@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<search />
-		<list />
+		<list :tagId="$route.params.tagId" />
 		<sidebar />
 	</div>
 </template>

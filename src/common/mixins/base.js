@@ -1,17 +1,16 @@
 export default {
 	data() {
-		return {};
+		return {
+			dialogVisible: false,
+			articleType: []
+		};
 	},
 	created() {
-		if(this.$store.state.tags.length === 0) {
-			this.getArticleTag();
-		}
 	},
 	methods: {
 		getArticleTag() {
 			this.$get('/api/articleTag').then(res => {
 				if(res.status === '200') {
-					res = res.result;
 					this.$store.commit('changeTags', res.list);
 				} else {
 					this.$store.commit('message', {
@@ -20,6 +19,21 @@ export default {
 					});
 				}
 			});
+		},
+		getArticleType() {
+			this.$get('/api/articleType').then(res => {
+				if(res.status === '200') {
+					this.articleType = res.list;
+				} else {
+					this.$store.commit('message', {
+						type: 'error',
+						message: res.msg
+					});
+				}
+			});
+		},
+		closeDialog() {
+			this.dialogVisible = false;
 		}
 	}
 };

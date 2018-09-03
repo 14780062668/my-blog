@@ -18,6 +18,9 @@ export default {
 	},
 	created() {
 		window.vm = this;
+		if(this.$store.state.tags.length === 0) {
+			this.getArticleTag();
+		}
 	}
 };
 </script>

@@ -2,27 +2,30 @@
 	<div class="editor_box">
 		<mavon-editor id="editor"
 			ref=md
-			:source="content"
 			@save="save" />
-		<el-button type="primary" class="save fr">保 存</el-button>
+		<save-article ref="saveArticle"
+			:content="content" />
 	</div>
 </template>
 <script>
 import {mavonEditor} from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
+import SaveArticle from './SaveArticle.vue';
 export default {
 	components: {
-		mavonEditor
+		mavonEditor,
+		SaveArticle
 	},
 	data() {
 		return {
-			content: 'wws',
-			value: 'ee'
+			content: ''
 		};
 	},
 	methods: {
 		save(val) {
-			console.log(val);
+			console.log('val ====', val);
+			this.content = val;
+			this.$refs.saveArticle.dialogVisible = true;
 		}
 	}
 };
@@ -32,6 +35,4 @@ export default {
 	height 600px
 .editor_box
 	overflow hidden
-	.save
-		margin-top 20px
 </style>

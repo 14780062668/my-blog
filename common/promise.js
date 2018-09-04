@@ -1,13 +1,10 @@
-let promise = new Promise((resolve, reject) => {
-	resolve();
+var p1 = new Promise(function (resolve, reject) {
+	setTimeout(resolve, 500, 'P1');
 });
-// module.exports = promise;
-
-function fn1() {
-	console.log('fn1');
-}
-function fn2() {
-	console.log('fn2');
-}
-
-promise.then(fn1).then(fn2);
+var p2 = new Promise(function (resolve, reject) {
+	setTimeout(resolve, 600, 'P2');
+});
+// 同时执行p1和p2，并在它们都完成后执行then:
+Promise.all([p1, p2]).then(function (results) {
+	console.log(results); // 获得一个Array: ['P1', 'P2']
+});

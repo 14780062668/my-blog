@@ -4,7 +4,7 @@ export default {
 			sizes: [10],
 			layout: 'sizes, prev, pager, next',
 			currentPage: 1,
-			pageSize: 10,
+			pageSize: 2,
 			total: 0
 		};
 	},

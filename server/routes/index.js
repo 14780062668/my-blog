@@ -79,8 +79,8 @@ router.post('/api/addArticle', function (req, res, next) {
 	});
 });
 // 文章列表
-
-const promise = new Promise((resolve, reject) => {
+let count = '';
+let promise = new Promise((resolve,reject) => {
 	resolve();
 });
 router.post('/api/articleList', function (req, res, next) {
@@ -94,126 +94,126 @@ router.post('/api/articleList', function (req, res, next) {
 	if(tagId){
 		params.tagId = tagId;
 	}
-	let count = 0;
-	promise.then(() => {
+	let p1 = new Promise((resolve,reject) => {
 		let modelList = models.articleList.find(params);
-		modelList.count({}, (err, count) => {
-			if(err){
-				res.json({
-					status: '-1',
-					msg: err.message
-				});
-			}else{
-				count = count;
-			}
-			console.log('count==end', count);
-		});
-	}).then(()=> {
+		resolve(modelList.count());
+		//modelList.count({}, (err, count) => {
+			// if(err){
+			// 	res.json({
+			// 		status: '-1',
+			// 		msg: err.message
+			// 	});
+			// }else{
+			// 	count = count;
+			// }
+		// 	resolve(count);
+		// 	return count;
+		// });
+	});
+	let p2 = new Promise((resolve,reject) => {
 		let modelList = models.articleList.find(params);
 		modelList.skip(skip).limit(pageSize);
 		modelList.sort({
 			[sort]: -1
 		});
-		modelList.exec((err, data) => {
-			console.log('counts==', count);
-			console.log('data==', data);
-			if (err) {
-				res.json({
-					status: '-1',
-					msg: err.message
-				});
-			} else {
-				console.log('counts==end2', count);
-				res.json({
-					status: '200',
-					msg: '返回成功',
-					result: {
-						currentPage: page.currentPage,
-						pageSize: page.pageSize, 
-						list: data,
-						total: count
-					}
-				});
+		resolve(modelList.exec());
+		//  modelList.exec((err, data) => {
+			// if (err) {
+			// 	res.json({
+			// 		status: '-1',
+			// 		msg: err.message
+			// 	});
+			// } else {
+			// 	// res.json({
+			// 	// 	status: '200',
+			// 	// 	msg: '返回成功',
+			// 	// 	result: {
+			// 	// 		currentPage: page.currentPage,
+			// 	// 		pageSize: page.pageSize, 
+			// 	// 		list: data,
+			// 	// 		total: 111
+			// 	// 	}
+			// 	// });
+			// 
+			// resolve(data);
+			// return data;
+		//});
+	});
+	Promise.all([p1, p2]).then(result => {
+		console.log('result=====', result);
+		res.json({
+			status: '200',
+			msg: '返回成功',
+			result: {
+				currentPage: page.currentPage,
+				pageSize: page.pageSize, 
+				list: result,
+				total: result
 			}
 		});
+	}).catch(err => {
+		console.log('err===', err);
 	});
-	// modelList.count({}, (err, count) => {
-	// 	if(err) {
-	// 		res.json({
-	// 			status: '-1',
-	// 			msg: err.message
-	// 		});
-	// 	}else{
-	// 		modelList.skip(skip).limit(pageSize);
-	// 		modelList.sort({
-	// 			[sort]: -1
-	// 		});
-	// 		modelList.exec((err, data) => {
-	// 			if (err) {
-	// 				res.json({
-	// 					status: '-1',
-	// 					msg: err.message
-	// 				});
-	// 			} else {
-	// 				res.json({
-	// 					status: '200',
-	// 					msg: '返回成功',
-	// 					result: {
-	// 						currentPage: page.currentPage,
-	// 						pageSize: page.pageSize, 
-	// 						list: data,
-	// 						total: count
-	// 					}
-	// 				});
-	// 			}
-	// 		});
-	// 	}
+	console.log(result);
+
+	// describe('Query Promise', function(){
+	// 	it('test', function(done){
+	// 		var a = User.find({uname: 'a'}).exec()
+	// 		var b = User.find({uname: 'd'}).exec()
+	// 		var c = User.find({uname: 'c'}).exec()
+	// 		var d = User.find({uname: 'e'}).exec()
+			
+	// 		Promise.all([a,b,c,d]).then(function(results){
+	// 			console.log(results)
+	// 			done()
+	// 		})
+			
+	// 	})
+		
+	// })
+	// promise.then(() => {
+	// 	let modelList = models.articleList.find(params);
+	// 	modelList.count({}, (err, count) => {
+	// 		if(err){
+	// 			res.json({
+	// 				status: '-1',
+	// 				msg: err.message
+	// 			});
+	// 		}else{
+	// 			count = count;
+	// 		}
+	// 		console.log('count==end', count);
+	// 	});
+	// }).then(()=> {
+	// 	let modelList = models.articleList.find(params);
+	// 	modelList.skip(skip).limit(pageSize);
+	// 	modelList.sort({
+	// 		[sort]: -1
+	// 	});
+	// 	modelList.exec((err, data) => {
+	// 		console.log('counts==', count);
+	// 		console.log('data==', data);
+	// 		if (err) {
+	// 			res.json({
+	// 				status: '-1',
+	// 				msg: err.message
+	// 			});
+	// 		} else {
+	// 			console.log('counts==end2', count);
+	// 			res.json({
+	// 				status: '200',
+	// 				msg: '返回成功',
+	// 				result: {
+	// 					currentPage: page.currentPage,
+	// 					pageSize: page.pageSize, 
+	// 					list: data,
+	// 					total: count
+	// 				}
+	// 			});
+	// 		}
+	// 	});
 	// });
 	
-});
-
-// 查询商品列表数据
-router.get("/list", function (req, res, next) {
-	let page = parseInt(req.param("page"));
-	let pageSize = parseInt(req.param("pageSize"));
-	let priceLevel = req.param("priceLevel");
-	let sort = req.param("sort");
-	let skip = (page - 1) * pageSize;
-	var priceGt = '', priceLte = '';
-	let params = {};
-	if (priceLevel != 'all') {
-		switch (priceLevel) {
-			case '0': priceGt = 0; priceLte = 100; break;
-			case '1': priceGt = 100; priceLte = 500; break;
-			case '2': priceGt = 500; priceLte = 1000; break;
-			case '3': priceGt = 1000; priceLte = 5000; break;
-		}
-		params = {
-			salePrice: {
-				$gt: priceGt,
-				$lte: priceLte
-			}
-		}
-	}
-	let goodsModel = Goods.find(params).skip(skip).limit(pageSize);
-	goodsModel.sort({ 'salePrice': sort });
-	goodsModel.exec(function (err, doc) {
-		if (err) {
-			res.json({
-				status: '1',
-				msg: err.message
-			});
-		} else {
-			res.json({
-				status: '0',
-				msg: '',
-				result: {
-					count: doc.length,
-					list: doc
-				}
-			});
-		}
-	})
 });
 
 module.exports = router;

@@ -6,10 +6,12 @@
 		<ul class="list-box">
 			<li v-for="item in list" :key="item.id">
 				<h3>
-					<type-icon :tagId="item.tagId" />
-					{{item.title}}
+					<router-link to="/home/article_detailte">
+						<type-icon :tagId="item.tagId" />
+						{{item.title}}
+					</router-link>
 				</h3>
-				<p class="note">{{item.content}}</p>
+				<div class="note" v-html="item.content"></div>
 				<p class="meta">
 					<time>
 						<i class="el-icon-time"></i>
@@ -27,13 +29,13 @@
 			</li>
 		</ul>
 		<el-pagination
+			background
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage"
-      :page-sizes="sizes"
       :page-size="pageSize"
       :layout="layout"
-      :total="1000">
+      :total="total">
     </el-pagination>
 	</div>
 </template>
@@ -99,7 +101,11 @@ export default {
 				if(res.status === '200') {
 					let result = res.result;
 					this.list = result.list;
+					this.total = result.total;
+					console.log(this.total);
 				} else {
+					this.list = [];
+					this.total = 0;
 					this.$store.commit('message', {
 						type: 'error',
 						message: res.msg

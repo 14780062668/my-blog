@@ -23,9 +23,16 @@ export default {
 	},
 	methods: {
 		save(val) {
-			console.log('val ====', val);
-			this.content = val;
-			this.$refs.saveArticle.dialogVisible = true;
+			if(val){
+				this.content = val;
+				console.log('content====', this.content);
+				this.$refs.saveArticle.dialogVisible = true;
+			}else{
+				this.$store.commit('message', {
+					type: 'warning',
+					message: '文章不能为空'
+				});
+			}
 		}
 	}
 };

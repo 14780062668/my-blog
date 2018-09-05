@@ -1,10 +1,10 @@
 export default {
 	data() {
 		return {
-			sizes: [10],
-			layout: 'sizes, prev, pager, next',
+			sizes: [2],
+			layout: 'total, prev, pager, next',
 			currentPage: 1,
-			pageSize: 2,
+			pageSize: 10,
 			total: 0
 		};
 	},

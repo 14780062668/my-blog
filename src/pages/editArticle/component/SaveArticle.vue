@@ -38,6 +38,7 @@
 </template>
 <script>
 import Base from '../../../common/mixins/base.js';
+import marked from 'marked';
 export default {
 	mixins: [Base],
 	props: ['content'],
@@ -92,13 +93,14 @@ export default {
 		savearticle() {
 			const nowDate = new Date().getTime();
 			const createTime = nowDate.toString();
+			const content = marked(this.content);
 			const { title, typeId } = this.ruleForm;
 			this.$post('/api/addArticle', {
 				title,
 				tagId: this.ruleForm.tagList,
 				typeId,
 				author: this.$store.state.name,
-				content: this.content,
+				content,
 				createTime,
 				editTime: createTime
 			}).then(res => {

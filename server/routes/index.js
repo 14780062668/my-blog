@@ -97,18 +97,6 @@ router.post('/api/articleList', function (req, res, next) {
 	let p1 = new Promise((resolve,reject) => {
 		let modelList = models.articleList.find(params);
 		resolve(modelList.count());
-		//modelList.count({}, (err, count) => {
-			// if(err){
-			// 	res.json({
-			// 		status: '-1',
-			// 		msg: err.message
-			// 	});
-			// }else{
-			// 	count = count;
-			// }
-		// 	resolve(count);
-		// 	return count;
-		// });
 	});
 	let p2 = new Promise((resolve,reject) => {
 		let modelList = models.articleList.find(params);
@@ -117,27 +105,6 @@ router.post('/api/articleList', function (req, res, next) {
 			[sort]: -1
 		});
 		resolve(modelList.exec());
-		//  modelList.exec((err, data) => {
-			// if (err) {
-			// 	res.json({
-			// 		status: '-1',
-			// 		msg: err.message
-			// 	});
-			// } else {
-			// 	// res.json({
-			// 	// 	status: '200',
-			// 	// 	msg: '返回成功',
-			// 	// 	result: {
-			// 	// 		currentPage: page.currentPage,
-			// 	// 		pageSize: page.pageSize, 
-			// 	// 		list: data,
-			// 	// 		total: 111
-			// 	// 	}
-			// 	// });
-			// 
-			// resolve(data);
-			// return data;
-		//});
 	});
 	Promise.all([p1, p2]).then(result => {
 		console.log('result=====', result);
@@ -147,72 +114,13 @@ router.post('/api/articleList', function (req, res, next) {
 			result: {
 				currentPage: page.currentPage,
 				pageSize: page.pageSize, 
-				list: result,
-				total: result
+				list: result[1],
+				total: result[0]
 			}
 		});
 	}).catch(err => {
 		console.log('err===', err);
 	});
-	console.log(result);
-
-	// describe('Query Promise', function(){
-	// 	it('test', function(done){
-	// 		var a = User.find({uname: 'a'}).exec()
-	// 		var b = User.find({uname: 'd'}).exec()
-	// 		var c = User.find({uname: 'c'}).exec()
-	// 		var d = User.find({uname: 'e'}).exec()
-			
-	// 		Promise.all([a,b,c,d]).then(function(results){
-	// 			console.log(results)
-	// 			done()
-	// 		})
-			
-	// 	})
-		
-	// })
-	// promise.then(() => {
-	// 	let modelList = models.articleList.find(params);
-	// 	modelList.count({}, (err, count) => {
-	// 		if(err){
-	// 			res.json({
-	// 				status: '-1',
-	// 				msg: err.message
-	// 			});
-	// 		}else{
-	// 			count = count;
-	// 		}
-	// 		console.log('count==end', count);
-	// 	});
-	// }).then(()=> {
-	// 	let modelList = models.articleList.find(params);
-	// 	modelList.skip(skip).limit(pageSize);
-	// 	modelList.sort({
-	// 		[sort]: -1
-	// 	});
-	// 	modelList.exec((err, data) => {
-	// 		console.log('counts==', count);
-	// 		console.log('data==', data);
-	// 		if (err) {
-	// 			res.json({
-	// 				status: '-1',
-	// 				msg: err.message
-	// 			});
-	// 		} else {
-	// 			console.log('counts==end2', count);
-	// 			res.json({
-	// 				status: '200',
-	// 				msg: '返回成功',
-	// 				result: {
-	// 					currentPage: page.currentPage,
-	// 					pageSize: page.pageSize, 
-	// 					list: data,
-	// 					total: count
-	// 				}
-	// 			});
-	// 		}
-	// 	});
-	// });
 	
 });
 

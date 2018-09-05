@@ -6,6 +6,7 @@ import NotFoundComponent from '@/pages/404.vue';
 
 import Index from '@/pages/index';
 import HomeIndex from '@/pages/home/index';
+import ArticleDetail from '@/pages/home/ArticleDetail';
 import NoteIndex from '@/pages/note/index';
 import LiveIndex from '@/pages/live/index';
 import IntroductionIndex from '@/pages/introduction/index';
@@ -26,6 +27,10 @@ let router = new Router({
 			path: '/home',
 			name: 'HomeIndex',
 			component: HomeIndex
+		}, {
+			path: '/article_detailte',
+			name: 'ArticleDetail',
+			component: ArticleDetail
 		}, {
 			path: '/note',
 			name: 'NoteIndex',

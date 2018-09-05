@@ -2,7 +2,9 @@
 	<header>
 		<div class="header-box">
 			<router-link class="logo fl" to="/home">
-				<i class="iconfont icon-pic-blog"></i>
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#icon-pic-blog"></use>
+				</svg>
 				{{$store.state.name}}的博客
 			</router-link>
 			<nav class="fr">
@@ -40,9 +42,9 @@ export default {
 <style lang="stylus" scoped>
 	.logo
 		width 20%
-		i
+		svg
 			font-size 40px
-			vertical-align middle
+			color #f00
 	nav
 		overflow hidden
 		a

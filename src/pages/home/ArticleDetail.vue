@@ -7,14 +7,25 @@
 					<span v-else>转</span>
 					{{articleData.title}}
 				</h1>
-				<p class="info">
-					<span>{{articleData.createTime | formatTime}}</span>
-				</p>
 			</div>
 			<section v-html="articleData.content"></section>
+			<p class="info">
+				<time>
+					<i class="el-icon-time"></i>
+					{{articleData.createTime | formatTime}}
+				</time>
+				<span class="readNumber">
+					<i class="el-icon-view"></i>阅读 ( {{articleData.readNumber}} )
+				</span>
+				<span class="author fr">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-yonghu"></use>
+					</svg>
+					{{articleData.author}}
+				</span>
+			</p>
 		</div>
 		<sidebar />
-		{{articleData}}
 	</div>
 </template>
 <script>
@@ -54,7 +65,6 @@ export default {
 <style lang="stylus" scoped>
 .article_detail
 	.top
-		border-bottom 1px solid #eaeaea
 		padding 20px
 		h1
 			text-align center
@@ -69,8 +79,13 @@ export default {
 				width 24px
 				text-align center
 				vertical-align middle
-		.info
-			color #9199a1
 	section
 		padding 20px
+		min-height 400px
+	.info
+		padding 20px
+		overflow hidden
+		color #999
+		.readNumber
+			margin-left 20px			
 </style>

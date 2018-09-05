@@ -18,8 +18,10 @@
 						{{item.createTime | formatTime}}
 					</time>
 					<span class="author">
-						<i class="iconfont icon-yonghu"></i>
-						<a href="http://jspang.com/author/jspang001/">{{item.author}}</a>
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-yonghu"></use>
+						</svg>
+						{{item.author}}
 					</span>
 					<span class="pv"><i class="el-icon-view"></i>阅读 ( {{item.readNumber}} )</span>
 					<a class="pc" href="#">

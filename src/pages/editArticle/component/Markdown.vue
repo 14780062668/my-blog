@@ -23,11 +23,10 @@ export default {
 	},
 	methods: {
 		save(val) {
-			if(val){
+			if(val) {
 				this.content = val;
-				console.log('content====', this.content);
 				this.$refs.saveArticle.dialogVisible = true;
-			}else{
+			} else {
 				this.$store.commit('message', {
 					type: 'warning',
 					message: '文章不能为空'

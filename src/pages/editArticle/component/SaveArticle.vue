@@ -94,13 +94,14 @@ export default {
 			const nowDate = new Date().getTime();
 			const createTime = nowDate.toString();
 			const content = marked(this.content);
-			const { title, typeId } = this.ruleForm;
+			const { title, typeId, hasOriginal } = this.ruleForm;
 			this.$post('/api/addArticle', {
 				title,
 				tagId: this.ruleForm.tagList,
 				typeId,
 				author: this.$store.state.name,
 				content,
+				hasOriginal,
 				createTime,
 				editTime: createTime
 			}).then(res => {

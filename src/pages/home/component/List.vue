@@ -6,7 +6,7 @@
 		<ul class="list-box">
 			<li v-for="item in list" :key="item.id">
 				<h3>
-					<router-link to="/home/article_detailte">
+					<router-link :to="{name: 'ArticleDetail', params: {id: item.id}}">
 						<type-icon :tagId="item.tagId" />
 						{{item.title}}
 					</router-link>

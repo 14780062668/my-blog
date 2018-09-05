@@ -28,7 +28,7 @@ let router = new Router({
 			name: 'HomeIndex',
 			component: HomeIndex
 		}, {
-			path: '/article_detailte',
+			path: '/article_detailte/:id',
 			name: 'ArticleDetail',
 			component: ArticleDetail
 		}, {

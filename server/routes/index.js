@@ -63,7 +63,6 @@ router.post('/api/addArticle', function (req, res, next) {
 	const monInsert = new models.articleList(req.body);
 	monInsert.save(function(err, data){
 		if(err){
-			console.log(err);
 			res.json({
 				status: '-1',
 				msg: err.message
@@ -79,10 +78,6 @@ router.post('/api/addArticle', function (req, res, next) {
 	});
 });
 // 文章列表
-let count = '';
-let promise = new Promise((resolve,reject) => {
-	resolve();
-});
 router.post('/api/articleList', function (req, res, next) {
 	const { page, typeId, tagId, sort } = req.body;
 	const { currentPage, pageSize } = page;
@@ -121,7 +116,29 @@ router.post('/api/articleList', function (req, res, next) {
 	}).catch(err => {
 		console.log('err===', err);
 	});
-	
+});
+
+// 文章详情
+router.post('/api/articleDetail', function (req, res, next) {
+	const { id } = req.body;
+	models.articleList.find({
+		id
+	}, (err, data) => {
+		if(err){
+			res.json({
+				status: '-1',
+				msg: err.message
+			});
+		}else{
+			res.json({
+				status: '200',
+				msg: '返回成功',
+				result: data
+			});
+		}
+	}).catch(err => {
+		console.log('err===', err);
+	});
 });
 
 module.exports = router;

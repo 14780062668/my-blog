@@ -1,4 +1,5 @@
 const createError = require('http-errors');
+const fs = require('fs');
 const http = require('http');
 const express = require('express');
 const path = require('path');
@@ -13,6 +14,10 @@ const usersRouter = require('./server/routes/users');
 
 const app = express();
 
+//  日志文件
+// const accessLog = fs.createWriteStream(path.join(__dirname, '/logs/access.log'), {flags : 'a'});
+// const errorLog = fs.createWriteStream(path.join(__dirname, '/logs/error.log'), {flags : 'a'});  
+      
 // html template parsing
 app.engine('html', swig.renderFile);
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +30,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
+	console.info("params===", req.body);
   if (req.method == 'OPTIONS') {
-    res.send(200); /*让options请求快速返回*/
+		res.send(200); /*让options请求快速返回*/
   } else {
     next();
   }

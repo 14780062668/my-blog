@@ -77,6 +77,13 @@ export default {
 			return name;
 		}
 	},
+	watch: {
+		'$store.state.searchVal'(val, oldVal) {
+			console.log('val==', val);
+			console.log('oldVal==', oldVal);
+			this.getArticleList();
+		}
+	},
 	mounted() {
 		console.log(this.$route);
 		this.getArticleList();
@@ -98,6 +105,9 @@ export default {
 			}
 			if(this.tagId) {
 				params.tagId = this.tagId;
+			}
+			if(this.$store.state.searchVal) {
+				params.search = this.$store.state.searchVal;
 			}
 			this.$post('/api/articleList', params).then(res => {
 				if(res.status === '200') {

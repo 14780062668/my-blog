@@ -41,10 +41,11 @@ module.exports = {
 		'generator-star-spacing': 'off',
 		'keyword-spacing': [2, {
 			'overrides': {
-				"if": {"after": false},
-				"for": {"after": false},
-				"while": {"after": false}
-		}}],
+				"if": { "after": false },
+				"for": { "after": false },
+				"while": { "after": false }
+			}
+		}],
 		'space-before-function-paren': ['error', 'never'],
 		// allow debugger during development
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',

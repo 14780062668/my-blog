@@ -19,6 +19,7 @@ export default {
 	methods: {
 		search() {
 			this.$store.commit('changeSearch', this.searchVal);
+			console.log(this.searchVal);
 		}
 	},
 	destroyed() {

@@ -80,6 +80,7 @@ router.post('/api/addArticle', function (req, res, next) {
 // 文章列表
 router.post('/api/articleList', function (req, res, next) {
 	const { page, typeId, tagId, sort } = req.body;
+	const title = req.body.search;
 	const { currentPage, pageSize } = page;
 	let skip = (currentPage - 1) * pageSize;
 	let params = {};
@@ -88,6 +89,10 @@ router.post('/api/articleList', function (req, res, next) {
 	}
 	if(tagId){
 		params.tagId = tagId;
+	}
+	// 模糊查询
+	if(title){
+		params.title =  new RegExp(title);
 	}
 	let p1 = new Promise((resolve,reject) => {
 		let modelList = models.articleList.find(params);
@@ -102,7 +107,6 @@ router.post('/api/articleList', function (req, res, next) {
 		resolve(modelList.exec());
 	});
 	Promise.all([p1, p2]).then(result => {
-		console.log('result=====', result);
 		res.json({
 			status: '200',
 			msg: '返回成功',
@@ -130,6 +134,9 @@ router.post('/api/articleDetail', function (req, res, next) {
 				msg: err.message
 			});
 		}else{
+			let result = data[0]; 
+			result.readNumber += 1;
+			result.save();
 			res.json({
 				status: '200',
 				msg: '返回成功',

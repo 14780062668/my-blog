@@ -87,5 +87,5 @@ export default {
 		overflow hidden
 		color #999
 		.readNumber
-			margin-left 20px			
+			margin-left 20px
 </style>

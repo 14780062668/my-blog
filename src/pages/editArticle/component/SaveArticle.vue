@@ -112,6 +112,12 @@ export default {
 						type: 'success',
 						message: '发布成功'
 					});
+					this.$router.push({
+						name: 'ArticleDetail',
+						params: {
+							id: res.id
+						}
+					});
 				} else {
 					this.$store.commit('message', {
 						type: 'error',

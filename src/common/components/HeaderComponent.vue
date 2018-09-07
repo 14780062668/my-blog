@@ -44,7 +44,6 @@ export default {
 		width 20%
 		svg
 			font-size 40px
-			color #f00
 	nav
 		overflow hidden
 		a

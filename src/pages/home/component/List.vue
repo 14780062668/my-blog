@@ -3,15 +3,16 @@
 		<div class="title" v-if="!$store.state.searchVal">
 			<h2>{{name}}</h2>
 		</div>
-		<ul class="list-box">
+		<no-data v-if="total===0" />
+		<ul class="list-box" v-else>
 			<li v-for="item in list" :key="item.id">
 				<h3>
+					<type-icon :tagId="item.tagId" />
 					<router-link :to="{name: 'ArticleDetail', params: {id: item.id}}">
-						<type-icon :tagId="item.tagId" />
 						{{item.title}}
 					</router-link>
 				</h3>
-				<div class="note" v-html="item.content"></div>
+				<!-- <div class="note" v-html="item.content"></div> -->
 				<p class="meta">
 					<time>
 						<i class="el-icon-time"></i>
@@ -31,6 +32,7 @@
 			</li>
 		</ul>
 		<el-pagination
+			v-if="total>pageSize"
 			background
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -44,11 +46,13 @@
 <script>
 import table from '../../../common/mixins/table.js';
 import TypeIcon from '../../../common/components/TypeIcon.vue';
+import NoData from '../../../common/components/NoData.vue';
 export default {
 	props: ['typeId', 'tagId'],
 	mixins: [ table ],
 	components: {
-		TypeIcon
+		TypeIcon,
+		NoData
 	},
 	data() {
 		return {

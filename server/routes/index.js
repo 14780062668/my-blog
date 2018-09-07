@@ -148,4 +148,30 @@ router.post('/api/articleDetail', function (req, res, next) {
 	});
 });
 
+// 上传图片 addImg
+router.post('/api/addImg', function (req, res, next) {
+	const { id } = req.body;
+	models.articleList.find({
+		id
+	}, (err, data) => {
+		if(err){
+			res.json({
+				status: '-1',
+				msg: err.message
+			});
+		}else{
+			let result = data[0]; 
+			result.readNumber += 1;
+			result.save();
+			res.json({
+				status: '200',
+				msg: '返回成功',
+				result: data
+			});
+		}
+	}).catch(err => {
+		console.log('err===', err);
+	});
+});
+
 module.exports = router;

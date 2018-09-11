@@ -17,6 +17,11 @@ axios.interceptors.request.use(config => {
 	config.timeout = baseConfig.timeout;
 	config.data = JSON.stringify(config.data);
 	config.headers = baseConfig.headers;
+	if(config.url === '/api/uploadImg') {
+		config.headers = Object.assign({}, config.headers, {
+			'Content-Type': 'multipart/form-data'
+		});
+	}
 	// const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
 	// if(token){
 	//   config.params = {'token':token}

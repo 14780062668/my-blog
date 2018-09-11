@@ -19,7 +19,7 @@ mongoose.connection.on("disconnected", function () {
 });
 
 //  文章类型
-router.get('/api/articleType', function (req, res, next) {
+router.get('/api/articleType', function (req, res) {
 	models.articleType.find({}, function (err, data) {
 		if (err) {
 			res.json({
@@ -53,7 +53,7 @@ router.get('/api/articleTag', function (req, res, next) {
 	});
 });
 // 写文章
-router.post('/api/addArticle', function (req, res, next) {
+router.post('/api/addArticle', function (req, res) {
 	const param = {
 		id: req.body.createTime.toString(),
 		commentNumber: 0,
@@ -78,7 +78,7 @@ router.post('/api/addArticle', function (req, res, next) {
 	});
 });
 // 文章列表
-router.post('/api/articleList', function (req, res, next) {
+router.post('/api/articleList', function (req, res) {
 	const { page, typeId, tagId, sort } = req.body;
 	const title = req.body.search;
 	const { currentPage, pageSize } = page;
@@ -123,7 +123,7 @@ router.post('/api/articleList', function (req, res, next) {
 });
 
 // 文章详情
-router.post('/api/articleDetail', function (req, res, next) {
+router.post('/api/articleDetail', function (req, res) {
 	const { id } = req.body;
 	models.articleList.find({
 		id
@@ -148,30 +148,60 @@ router.post('/api/articleDetail', function (req, res, next) {
 	});
 });
 
+
+const multiparty = require('multiparty');
+const path = require('http');
+const util = require('util');
+
 // 上传图片 addImg
-router.post('/api/addImg', function (req, res, next) {
-	const { id } = req.body;
-	models.articleList.find({
-		id
-	}, (err, data) => {
-		if(err){
-			res.json({
-				status: '-1',
-				msg: err.message
-			});
-		}else{
-			let result = data[0]; 
-			result.readNumber += 1;
-			result.save();
-			res.json({
-				status: '200',
-				msg: '返回成功',
-				result: data
-			});
-		}
-	}).catch(err => {
-		console.log('err===', err);
-	});
+router.post('/api/uploadImg', function (req, res) {
+	
+// don't forget to delete all req.files when done 
+ //生成multiparty对象，并配置上传目标路径
+ var form = new multiparty.Form({uploadDir: '../public/upload/'});
+
+ //上传完成后处理
+ form.parse(req, function(err, fields, files) {
+ var obj ={};
+ console.log('err====2', err);
+ console.log('fields====2', fields);
+ console.log('files====3', files);
+
+	var filesTmp = JSON.stringify(files,null,2);
+	console.log('filesTmp====4', filesTmp);
+ if(err){
+		console.log('parse error: ' + err);
+		res.json({
+			status: '-1',
+			msg: err.message
+		});
+   }else {
+		console.log('parse files: ' + filesTmp);
+		res.json({
+			status: '200',
+			msg: '上次成功'
+		});
+    //  var inputFile = files.inputFile[0];
+    //  var uploadedPath = inputFile.path;
+    //  var dstPath = './public/upload/' + inputFile.originalFilename;
+   	// // 重命名为真实文件名
+		// fs.rename(uploadedPath, dstPath, function(err) {
+		// 	if(err){
+		// 		console.log('rename error: ' + err);
+		// 		res.json({
+		// 			status: '-1',
+		// 			msg: err.message
+		// 		});
+		// 	} else {
+		// 		console.log('rename ok');                
+		// 		res.json({
+		// 			status: '200',
+		// 			msg: '上次成功'
+		// 		});
+		// 	}
+		// });
+   }
+ });
 });
 
 module.exports = router;

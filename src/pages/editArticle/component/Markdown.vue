@@ -4,6 +4,7 @@
 			ref=md
 			@imgAdd="imgAdd"
 			@imgDel="imgDel"
+			v-model="content"
 			@save="save" />
 		<save-article ref="saveArticle"
 			:content="content" />
@@ -20,13 +21,13 @@ export default {
 	},
 	data() {
 		return {
-			content: ''
+			content: '',
+			vals: 'w'
 		};
 	},
 	methods: {
-		save(val) {
-			if(val) {
-				this.content = val;
+		save() {
+			if(this.content) {
 				this.$refs.saveArticle.dialogVisible = true;
 			} else {
 				this.$store.commit('message', {
@@ -35,17 +36,15 @@ export default {
 				});
 			}
 		},
-		imgAdd(pos, $file) {
-			console.log(pos, $file);
+		imgAdd(filename, file) {
 			// 第一步.将图片上传到服务器.
-			var params = new FormData();
-			params.append('image', $file);
-			console.log(params);
-			this.$post('/api/articleList', params).then(res => {
+			let formdata = new FormData();
+			formdata.append('file', file, file.name);
+			console.log(formdata);
+			this.$post('/api/uploadImg', formdata).then(res => {
 				if(res.status === '200') {
-					// 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-					// $vm.$img2Url 详情见本页末尾
-					vm.$img2Url(pos, res.url);
+					// 更改图片内文章上传地址
+					this.$refs.editor.$img2Url(filename, res.body.data);
 				} else {
 					this.$store.commit('message', {
 						type: 'error',

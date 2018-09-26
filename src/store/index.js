@@ -21,26 +21,22 @@ const store = new Vuex.Store({
 			 */
 			let { type, message } = obj;
 			console.log('$message===', obj);
-			switch (type) {
-			case 'success':
-				vm.$message({
-					message,
-					type
-				});
-				break;
-			case 'warning':
-				vm.$message({
-					type,
-					message
-				});
-				break;
-			case 'error':
-				message = message || '请求错误';
-				vm.$message.error(message);
-				break;
-			default:
-				vm.$message(message);
-			}
+			console.log(vm.message);
+			vm.$message[type](message);
+			// switch (type) {
+			// case 'success':
+			// 	vm.$message.success(message);
+			// 	break;
+			// case 'warning':
+			// 	vm.$message.warning(message);
+			// 	break;
+			// case 'error':
+			// 	message = message || '请求错误';
+			// 	vm.$message.error(message);
+			// 	break;
+			// default:
+			// 	vm.$message.warning(message);
+			// }
 		}
 	}
 });

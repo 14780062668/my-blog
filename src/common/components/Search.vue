@@ -1,12 +1,11 @@
 <template>
 	<div class="search-box">
-			<el-input
+			<a-input-search
 				placeholder="请输入内容"
-				@keyup.enter.native="search"
-				v-model="searchVal">
-				<i slot="suffix" class="el-input__icon el-icon-search"
-					@click="search"></i>
-			</el-input>
+				@search="search"
+				v-model="searchVal"
+				enterButton
+			/>
 		</div>
 </template>
 <script>

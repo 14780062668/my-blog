@@ -7,14 +7,16 @@ import '@/static/css/default.styl';
 import api from '../../axios';
 
 // 引入element-ui组件
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import { Input, pagination, message } from 'ant-design-vue';
+// import 'ant-design-vue/dist/antd.css';
 import '../../../static/iconfont/iconfont.js';
 
 // 引入filter
 import '../../tools/vue.filter.js';
 
-Vue.use(ElementUI);
+Vue.use(Input);
+Vue.use(pagination);
+Vue.prototype.$message = message;
 Vue.use(VueLazyload, {
 	error: 'dist/error.png',
 	loading: 'dist/loading.gif'

@@ -31,16 +31,10 @@
 				</p>
 			</li>
 		</ul>
-		<el-pagination
-			v-if="total>pageSize"
-			background
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="currentPage"
-      :page-size="pageSize"
-      :layout="layout"
-      :total="total">
-    </el-pagination>
+		<a-pagination
+			:defaultCurrent="defaultCurrent"
+			@change="handleCurrentChange"
+			:total="total" />
 	</div>
 </template>
 <script>
@@ -118,7 +112,6 @@ export default {
 					let result = res.result;
 					this.list = result.list;
 					this.total = result.total;
-					console.log(this.total);
 				} else {
 					this.list = [];
 					this.total = 0;
